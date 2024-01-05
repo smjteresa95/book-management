@@ -1,0 +1,34 @@
+database: h2
+
+logging:
+  level:
+    org:
+      springframework.web: debug
+
+spring:
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    hibernate:
+      ddl-auto: validate
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+
+  h2:
+    console:
+      enabled: true
+
+  datasource:
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    driverClassName: org.h2.Driver
+    username: sa
+    password:
+
+  sql:
+    init:
+      schema-locations: classpath*:db/${database}/schema.sql
+      data-locations: classpath*:db/${database}/data.sql
+      

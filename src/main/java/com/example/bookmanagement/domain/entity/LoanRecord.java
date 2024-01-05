@@ -1,14 +1,12 @@
 package com.example.bookmanagement.domain.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Getter
-@RequiredArgsConstructor
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -17,11 +15,12 @@ import java.sql.Timestamp;
 @Table(name = "loan_record")
 public class LoanRecord {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long loanId;
-    private Long bookUId;
+    private Long bookId;
     private Long userId;
-    private Timestamp loanDate;
-    private Timestamp dueDate;
-    private Timestamp returnDate;
+    private LocalDateTime loanDate;
+    private LocalDateTime dueDate;
+    private LocalDateTime returnDate;
 
 }

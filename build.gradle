@@ -34,9 +34,18 @@ dependencies {
     runtimeOnly 'com.h2database:h2'
     runtimeOnly 'com.mysql:mysql-connector-j'
     annotationProcessor 'org.projectlombok:lombok'
+
+    //entity 와 dto(서로 다른 객체) 간의 필드값을 자동으로 mapping
+    implementation group: 'org.projectlombok', name: 'lombok-mapstruct-binding', version: '0.2.0'
+    implementation group: 'org.mapstruct', name: 'mapstruct', version: '1.5.3.Final'
+    annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.3.Final'
+
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
     testImplementation 'org.springframework.security:spring-security-test'
+    //junit5
+    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.10.1'
+
 }
 
 tasks.named('test') {
