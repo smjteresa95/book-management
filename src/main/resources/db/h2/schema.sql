@@ -2,7 +2,10 @@ DROP TABLE IF EXISTS books;
 DROP TABLE IF EXISTS loan_record;
 DROP TABLE IF EXISTS major_category;
 DROP TABLE IF EXISTS sub_category;
+DROP TABLE IF EXISTS user_roles;
 DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS roles;
+
 
 
 CREATE TABLE books (

@@ -45,6 +45,10 @@ dependencies {
     testImplementation 'org.springframework.security:spring-security-test'
     //junit5
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.10.1'
+    //Java8에서 추가된 LocalDateTime을 objectMapper 메서드를 사용했을 때 직렬화/역직렬화 할 수 있게 한다.
+    implementation group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: '2.16.1'
+
+
 
 }
 

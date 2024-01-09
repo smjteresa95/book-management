@@ -13,8 +13,8 @@ import java.time.LocalDate;
 @ToString
 public class BookResponseDto {
 
-    private String majorCategory;
-    private String subCategory;
+    private Integer majorCategoryId;
+    private Integer subCategoryId;
     private String title;
     private String isbn;
     private String author;
@@ -24,4 +24,5 @@ public class BookResponseDto {
     private Integer availableCopies;
     private Timestamp createdAt;
     private Timestamp updatedAt;
+
 }

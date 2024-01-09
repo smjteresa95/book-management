@@ -3,7 +3,9 @@ database: h2
 logging:
   level:
     org:
-      springframework.web: debug
+      springframework:
+          web: debug
+          security: debug
 
 spring:
   jpa:

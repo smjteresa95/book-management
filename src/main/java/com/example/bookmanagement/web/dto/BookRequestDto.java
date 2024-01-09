@@ -23,18 +23,4 @@ public class BookRequestDto {
     private LocalDate publicationDate;
     private Integer availableCopies;
 
-    public Book toEntity(){
-        return Book.builder()
-                .id(id)
-                .majorCategoryId(majorCategoryId)
-                .subCategoryId(subCategoryId)
-                .title(title)
-                .isbn(isbn)
-                .author(author)
-                .translator(translator)
-                .publisher(publisher)
-                .publicationDate(publicationDate)
-                .availableCopies(availableCopies)
-                .build();
-    }
 }
