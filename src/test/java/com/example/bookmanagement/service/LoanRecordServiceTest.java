@@ -6,8 +6,7 @@ import com.example.bookmanagement.domain.repository.BookRepository;
 import com.example.bookmanagement.domain.repository.LoanRecordRepository;
 import com.example.bookmanagement.exception.BookLoanBlockedException;
 import com.example.bookmanagement.web.dto.BookLoanRequestDto;
-import com.example.bookmanagement.web.dto.BookLoanUpdateDto;
-import com.example.bookmanagement.web.dto.LoanRecordResponseDto;
+import com.example.bookmanagement.web.dto.BookLoanResponseDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -41,7 +40,7 @@ public class LoanRecordServiceTest {
     @Test
     public void getAllLoanRecordByBookIdTest(){
         long bookId = 2L;
-        List<LoanRecordResponseDto> responseDto = service.getAllByBookId(bookId);
+        List<BookLoanResponseDto> responseDto = service.getAllByBookId(bookId);
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         String retrievedDate = responseDto.get(0).getLoanDate().format(formatter);
@@ -53,7 +52,7 @@ public class LoanRecordServiceTest {
     @Test
     public void getAllLoanRecordByUserIdTest(){
         long userId = 1L;
-        List<LoanRecordResponseDto> responseDto = service.getAllByUserId(userId);
+        List<BookLoanResponseDto> responseDto = service.getAllByUserId(userId);
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         String retrievedDate = responseDto.get(1).getLoanDate().format(formatter);

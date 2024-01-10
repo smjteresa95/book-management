@@ -2,9 +2,9 @@ package com.example.bookmanagement.web.controller;
 
 import com.example.bookmanagement.service.BookService;
 import com.example.bookmanagement.service.LoanRecordService;
+import com.example.bookmanagement.web.dto.BookLoanResponseDto;
 import com.example.bookmanagement.web.dto.BookRequestDto;
 import com.example.bookmanagement.web.dto.BookResponseDto;
-import com.example.bookmanagement.web.dto.LoanRecordResponseDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
@@ -44,8 +44,8 @@ public class BookApiController {
     }
 
     @GetMapping("/{id}/loan")
-    public ResponseEntity<List<LoanRecordResponseDto>> getLoanRecordsByBookId(@PathVariable("id") Long id){
-        List<LoanRecordResponseDto> recordList = loanService.getAllByBookId(id);
+    public ResponseEntity<List<BookLoanResponseDto>> getLoanRecordsByBookId(@PathVariable("id") Long id){
+        List<BookLoanResponseDto> recordList = loanService.getAllByBookId(id);
         if(recordList.isEmpty()) log.catching(new NoSuchElementException("대출 이력이 없는 도서이거나 존재하지 않는 도서입니다."));
         return new ResponseEntity<>(recordList, HttpStatus.OK);
     }

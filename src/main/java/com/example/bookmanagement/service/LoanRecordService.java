@@ -10,11 +10,10 @@ import com.example.bookmanagement.exception.EmptyObjectException;
 import com.example.bookmanagement.util.mapper.LoanRecordResponseMapper;
 import com.example.bookmanagement.util.mapper.LoanRecordUpdateMapper;
 import com.example.bookmanagement.web.dto.BookLoanRequestDto;
+import com.example.bookmanagement.web.dto.BookLoanResponseDto;
 import com.example.bookmanagement.web.dto.BookLoanUpdateDto;
 import com.example.bookmanagement.web.dto.BookRequestDto;
-import com.example.bookmanagement.web.dto.LoanRecordResponseDto;
 import lombok.RequiredArgsConstructor;
-import lombok.Value;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -38,20 +37,20 @@ public class LoanRecordService {
 
     private final LoanPolicyConfig policyConfig;
 
-    public List<LoanRecordResponseDto> getAllByBookId(long id){
+    public List<BookLoanResponseDto> getAllByBookId(long id){
         List<LoanRecord> loanRecordList = repository.getAllByBookId(id);
         if(loanRecordList.isEmpty()) throw new NoSuchElementException("대출 이력이 없는 도서입니다.");
-        List<LoanRecordResponseDto> responseDtoList = new ArrayList<>();
+        List<BookLoanResponseDto> responseDtoList = new ArrayList<>();
         for(LoanRecord record : loanRecordList){
             responseDtoList.add(responseMapper.toDto(record));
         }
         return responseDtoList;
     }
 
-    public List<LoanRecordResponseDto> getAllByUserId(long id){
+    public List<BookLoanResponseDto> getAllByUserId(long id){
         List<LoanRecord> loanRecordList = repository.getAllByUserId(id);
         if(loanRecordList.isEmpty()) throw new NoSuchElementException("대출 이력이 없는 사용자입니다.");
-        List<LoanRecordResponseDto> responseDtoList = new ArrayList<>();
+        List<BookLoanResponseDto> responseDtoList = new ArrayList<>();
         for(LoanRecord record : loanRecordList){
             responseDtoList.add(responseMapper.toDto(record));
         }
