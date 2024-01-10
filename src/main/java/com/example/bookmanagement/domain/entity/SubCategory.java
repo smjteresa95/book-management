@@ -1,9 +1,6 @@
 package com.example.bookmanagement.domain.entity;
 
-import com.example.bookmanagement.domain.entity.model.CategoryEntity;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Getter
@@ -13,7 +10,11 @@ import lombok.*;
 
 @Entity
 @Table(name = "sub_category")
-public class SubCategory extends CategoryEntity {
+public class SubCategory {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
     private Integer majorCategoryId;
+    private String category;
 
 }

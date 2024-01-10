@@ -55,17 +55,12 @@ CREATE TABLE users (
                        updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
-CREATE TABLE roles (
-                       id INT AUTO_INCREMENT PRIMARY KEY,
-                       name VARCHAR(20)
-);
 
 CREATE TABLE user_roles (
                             user_id BIGINT,
-                            role_id INT,
-                            PRIMARY KEY (user_id, role_id),
-                            FOREIGN KEY (user_id) REFERENCES users(id),
-                            FOREIGN KEY (role_id) REFERENCES roles(id)
+                            role_name VARCHAR(50),
+                            PRIMARY KEY (user_id, role_name),
+                            FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
 

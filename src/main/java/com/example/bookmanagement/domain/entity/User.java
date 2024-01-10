@@ -1,5 +1,6 @@
 package com.example.bookmanagement.domain.entity;
 
+import com.example.bookmanagement.enums.ERole;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -32,13 +33,11 @@ public class User {
     private String lastName;
     private String phoneNum;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-            name = "user_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id")
-    )
-    private Set<Role> roles = new HashSet<>();
+    @ElementCollection(fetch = FetchType.LAZY)
+    @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
+    @Enumerated(EnumType.STRING) // Use EnumType.STRING to store the enum values as strings
+    @Column(name = "role_name")
+    private Set<ERole> roles = new HashSet<>();
 
     @CreationTimestamp
     private Timestamp createdAt;

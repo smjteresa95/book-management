@@ -1,5 +1,6 @@
 package com.example.bookmanagement.service;
 
+import com.example.bookmanagement.config.TestConfig;
 import com.example.bookmanagement.domain.entity.Book;
 import com.example.bookmanagement.domain.repository.BookRepository;
 import com.example.bookmanagement.web.dto.BookRequestDto;
@@ -12,6 +13,7 @@ import org.mockito.InjectMocks;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
@@ -44,8 +46,8 @@ public class BookServiceTest {
     @Test
     public void saveBookTest(){
         BookRequestDto dto = BookRequestDto.builder()
-                .majorCategoryId(0)
-                .subCategoryId(1)
+                .majorCategoryId(10)
+                .subCategoryId(5)
                 .title("일하는 마음")
                 .isbn("9791160560626")
                 .author("제현주")
@@ -57,9 +59,9 @@ public class BookServiceTest {
         service.saveBook(dto);
 
         List<Book> books = repository.findAll();
-        assertThat(books.size()).isEqualTo(2);
-        assertThat(books.get(1).getIsbn()).isEqualTo("9791160560626");
-        assertThat(books.get(1).getTitle()).isEqualTo("일하는 마음");
+        assertThat(books.size()).isEqualTo(3);
+        assertThat(books.get(2).getIsbn()).isEqualTo("9791160560626");
+        assertThat(books.get(2).getTitle()).isEqualTo("일하는 마음");
     }
 
     @Test

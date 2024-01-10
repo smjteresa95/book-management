@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Getter
@@ -23,4 +24,11 @@ public class LoanRecord {
     private LocalDateTime dueDate;
     private LocalDateTime returnDate;
 
+    @PrePersist
+    @PreUpdate
+    public void calculateDueDate() {
+        if (loanDate != null) {
+            dueDate = loanDate.plusDays(14);
+        }
+    }
 }

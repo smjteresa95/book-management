@@ -2,7 +2,6 @@ package com.example.bookmanagement.web.dto;
 
 import lombok.*;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Getter
@@ -11,11 +10,10 @@ import java.time.LocalDateTime;
 @Builder
 @RequiredArgsConstructor
 @ToString
-public class LoanRecordResponseDto {
-    private Long loanId;
+public class BookLoanRequestDto {
     private Long bookId;
     private Long userId;
-    private LocalDateTime loanDate;
-    private LocalDateTime dueDate;
-    private LocalDateTime returnDate;
+
+    @Builder.Default
+    private LocalDateTime returnDate = null;
 }

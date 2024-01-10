@@ -3,10 +3,12 @@ package com.example.bookmanagement.web.controller;
 import com.example.bookmanagement.domain.entity.Book;
 import com.example.bookmanagement.domain.repository.BookRepository;
 import com.example.bookmanagement.service.BookService;
+import com.example.bookmanagement.service.LoanRecordService;
 import com.example.bookmanagement.web.dto.BookRequestDto;
 import com.example.bookmanagement.web.dto.BookResponseDto;
-import com.fasterxml.jackson.core.JsonProcessingException;
+import com.example.bookmanagement.web.dto.LoanRecordResponseDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -16,6 +18,9 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import static org.mockito.Mockito.when;
@@ -35,6 +40,8 @@ public class BookApiControllerTest {
     @MockBean
     BookService service;
     @MockBean
+    LoanRecordService loanService;
+    @MockBean
     BookRepository repository;
 
     @Test
@@ -42,8 +49,8 @@ public class BookApiControllerTest {
     public void getBookTest() throws Exception {
         Long id = 1L;
         BookResponseDto bookDto = BookResponseDto.builder()
-                .majorCategoryId(0)
-                .subCategoryId(1)
+                .majorCategoryId(10)
+                .subCategoryId(5)
                 .title("일하는 마음")
                 .isbn("9791160560626")
                 .author("제현주")
@@ -64,8 +71,8 @@ public class BookApiControllerTest {
     public void saveBookTest() throws Exception {
         //given
         BookRequestDto correctDto = BookRequestDto.builder()
-                .majorCategoryId(0)
-                .subCategoryId(1)
+                .majorCategoryId(10)
+                .subCategoryId(5)
                 .title("일하는 마음")
                 .isbn("9791160560626")
                 .author("제현주")
@@ -94,8 +101,8 @@ public class BookApiControllerTest {
         Long id = 1L;
 
         Book initialBook = Book.builder()
-                .majorCategoryId(0)
-                .subCategoryId(1)
+                .majorCategoryId(10)
+                .subCategoryId(5)
                 .title("일하는 마음")
                 .isbn("9791160560626")
                 .author("제현주")
@@ -118,5 +125,22 @@ public class BookApiControllerTest {
 
     }
 
+    @Test
+    @WithMockUser
+    @DisplayName("해당 도서의 대출 전체이력 조회")
+    public void getLoanRecordsByBookIdTest() throws Exception {
+        long bookId = 2L;
+        List<LoanRecordResponseDto> loanRecords = new ArrayList<>();
+        LoanRecordResponseDto loanRecord = LoanRecordResponseDto.builder()
+                .bookId(1L)
+                .userId(1L)
+                .loanDate(LocalDateTime.of(2024, 1, 4, 0,0, 0))
+                .build();
+        loanRecords.add(loanRecord);
+        when(loanService.getAllByBookId(bookId)).thenReturn(loanRecords);
+
+        mockMvc.perform(get("/api/book/{id}/loan", bookId))
+                .andExpect(status().isOk());
+    }
 
 }
