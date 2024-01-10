@@ -5,5 +5,5 @@ import com.example.bookmanagement.web.dto.LoanRecordResponseDto;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "Spring")
-public interface LoanRecordMapper extends GenericMapper<LoanRecordResponseDto, LoanRecord> {
+public interface LoanRecordResponseMapper extends GenericMapper<LoanRecordResponseDto, LoanRecord> {
 }

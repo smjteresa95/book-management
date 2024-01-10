@@ -27,8 +27,8 @@ CREATE TABLE loan_record (
                              loanId BIGINT AUTO_INCREMENT PRIMARY KEY,
                              bookId BIGINT,
                              userId BIGINT,
-                             loanDate TIMESTAMP,
-                             dueDate TIMESTAMP,
+                             loanDate TIMESTAMP NOT NULL,
+                             dueDate TIMESTAMP NOT NULL,
                              returnDate TIMESTAMP
 );
 
