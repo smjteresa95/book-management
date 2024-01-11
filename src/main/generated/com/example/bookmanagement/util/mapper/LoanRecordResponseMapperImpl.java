@@ -1,38 +1,38 @@
 package com.example.bookmanagement.util.mapper;
 
 import com.example.bookmanagement.domain.entity.LoanRecord;
-import com.example.bookmanagement.web.dto.BookLoanResponseDto;
+import com.example.bookmanagement.web.dto.LoanRecordResponseDto;
 import javax.annotation.processing.Generated;
 import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-01-11T01:04:55+0900",
+    date = "2024-01-11T12:55:35+0900",
     comments = "version: 1.5.3.Final, compiler: javac, environment: Java 21.0.1 (Oracle Corporation)"
 )
 @Component
 public class LoanRecordResponseMapperImpl implements LoanRecordResponseMapper {
 
     @Override
-    public BookLoanResponseDto toDto(LoanRecord arg0) {
+    public LoanRecordResponseDto toDto(LoanRecord arg0) {
         if ( arg0 == null ) {
             return null;
         }
 
-        BookLoanResponseDto.BookLoanResponseDtoBuilder bookLoanResponseDto = BookLoanResponseDto.builder();
+        LoanRecordResponseDto.LoanRecordResponseDtoBuilder loanRecordResponseDto = LoanRecordResponseDto.builder();
 
-        bookLoanResponseDto.loanId( arg0.getLoanId() );
-        bookLoanResponseDto.bookId( arg0.getBookId() );
-        bookLoanResponseDto.userId( arg0.getUserId() );
-        bookLoanResponseDto.loanDate( arg0.getLoanDate() );
-        bookLoanResponseDto.dueDate( arg0.getDueDate() );
-        bookLoanResponseDto.returnDate( arg0.getReturnDate() );
+        loanRecordResponseDto.loanId( arg0.getLoanId() );
+        loanRecordResponseDto.bookId( arg0.getBookId() );
+        loanRecordResponseDto.userId( arg0.getUserId() );
+        loanRecordResponseDto.loanDate( arg0.getLoanDate() );
+        loanRecordResponseDto.dueDate( arg0.getDueDate() );
+        loanRecordResponseDto.returnDate( arg0.getReturnDate() );
 
-        return bookLoanResponseDto.build();
+        return loanRecordResponseDto.build();
     }
 
     @Override
-    public LoanRecord toEntity(BookLoanResponseDto arg0) {
+    public LoanRecord toEntity(LoanRecordResponseDto arg0) {
         if ( arg0 == null ) {
             return null;
         }
@@ -50,7 +50,7 @@ public class LoanRecordResponseMapperImpl implements LoanRecordResponseMapper {
     }
 
     @Override
-    public void updateFromDto(BookLoanResponseDto arg0, BookLoanResponseDto arg1) {
+    public void updateFromDto(LoanRecordResponseDto arg0, LoanRecordResponseDto arg1) {
         if ( arg0 == null ) {
             return;
         }

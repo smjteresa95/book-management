@@ -1,7 +1,7 @@
 package com.example.bookmanagement.web.controller;
 
 import com.example.bookmanagement.service.LoanRecordService;
-import com.example.bookmanagement.web.dto.BookLoanRequestDto;
+import com.example.bookmanagement.web.dto.LoanRecordRequestDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
@@ -14,12 +14,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/loan")
 @RequiredArgsConstructor
-public class BookLoanApiController {
+public class LoanRecordApiController {
 
     private final LoanRecordService loanService;
 
     @PostMapping
-    public ResponseEntity<?> loanBook(@RequestBody BookLoanRequestDto requestDto){
+    public ResponseEntity<?> loanBook(@RequestBody LoanRecordRequestDto requestDto){
         loanService.createBookLoan(requestDto);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }

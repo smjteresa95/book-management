@@ -4,7 +4,7 @@ import com.example.bookmanagement.domain.entity.Book;
 import com.example.bookmanagement.domain.repository.BookRepository;
 import com.example.bookmanagement.service.BookService;
 import com.example.bookmanagement.service.LoanRecordService;
-import com.example.bookmanagement.web.dto.BookLoanResponseDto;
+import com.example.bookmanagement.web.dto.LoanRecordResponseDto;
 import com.example.bookmanagement.web.dto.BookRequestDto;
 import com.example.bookmanagement.web.dto.BookResponseDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -130,8 +130,8 @@ public class BookApiControllerTest {
     @DisplayName("해당 도서의 대출 전체이력 조회")
     public void getLoanRecordsByBookIdTest() throws Exception {
         long bookId = 2L;
-        List<BookLoanResponseDto> loanRecords = new ArrayList<>();
-        BookLoanResponseDto loanRecord = BookLoanResponseDto.builder()
+        List<LoanRecordResponseDto> loanRecords = new ArrayList<>();
+        LoanRecordResponseDto loanRecord = LoanRecordResponseDto.builder()
                 .bookId(1L)
                 .userId(1L)
                 .loanDate(LocalDateTime.of(2024, 1, 4, 0,0, 0))

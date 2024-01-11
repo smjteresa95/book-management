@@ -81,16 +81,16 @@ INSERT INTO loan_record (bookId, userId, loanDate, dueDate)
 VALUES (1, 3, '2024-01-11 00:00:00', '2024-01-25 00:00:00');
 
 INSERT INTO loan_record (bookId, userId, loanDate, dueDate)
-VALUES (1, 3, '2024-01-11 00:00:00', '2024-01-25 00:00:00');
-
-INSERT INTO loan_record (bookId, userId, loanDate, dueDate)
-VALUES (1, 3, '2024-01-11 00:00:00', '2024-01-25 00:00:00');
-
-INSERT INTO loan_record (bookId, userId, loanDate, dueDate)
 VALUES (2, 3, '2024-01-11 00:00:00', '2024-01-25 00:00:00');
 
 INSERT INTO loan_record (bookId, userId, loanDate, dueDate)
-VALUES (2, 3, '2024-01-11 00:00:00', '2024-01-25 00:00:00');
+VALUES (3, 3, '2024-01-11 00:00:00', '2024-01-25 00:00:00');
+
+INSERT INTO loan_record (bookId, userId, loanDate, dueDate)
+VALUES (4, 3, '2024-01-11 00:00:00', '2024-01-25 00:00:00');
+
+INSERT INTO loan_record (bookId, userId, loanDate, dueDate)
+VALUES (5, 3, '2024-01-11 00:00:00', '2024-01-25 00:00:00');
 
 
 

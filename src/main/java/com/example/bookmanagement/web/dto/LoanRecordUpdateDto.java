@@ -10,8 +10,7 @@ import java.time.LocalDateTime;
 @Builder
 @RequiredArgsConstructor
 @ToString
-public class BookLoanResponseDto {
-    private Long loanId;
+public class LoanRecordUpdateDto {
     private Long bookId;
     private Long userId;
     private LocalDateTime loanDate;

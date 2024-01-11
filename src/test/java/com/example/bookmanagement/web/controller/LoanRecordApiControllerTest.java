@@ -4,8 +4,7 @@ import com.example.bookmanagement.domain.repository.BookRepository;
 import com.example.bookmanagement.domain.repository.LoanRecordRepository;
 import com.example.bookmanagement.service.BookService;
 import com.example.bookmanagement.service.LoanRecordService;
-import com.example.bookmanagement.web.dto.BookLoanRequestDto;
-import com.fasterxml.jackson.core.JsonProcessingException;
+import com.example.bookmanagement.web.dto.LoanRecordRequestDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +18,8 @@ import static org.springframework.security.test.web.servlet.request.SecurityMock
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(controllers = BookLoanApiController.class)
-public class BookLoanApiControllerTest {
+@WebMvcTest(controllers = LoanRecordApiController.class)
+public class LoanRecordApiControllerTest {
 
     @Autowired
     MockMvc mockMvc;
@@ -42,7 +41,7 @@ public class BookLoanApiControllerTest {
     public void loanBookTest() throws Exception {
         long userId = 1L;
         long bookId = 1L;
-        BookLoanRequestDto requestDto = BookLoanRequestDto.builder()
+        LoanRecordRequestDto requestDto = LoanRecordRequestDto.builder()
                 .bookId(bookId)
                 .userId(userId).build();
         String requestJson = objectMapper.writeValueAsString(requestDto);

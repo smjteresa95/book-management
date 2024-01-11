@@ -10,10 +10,11 @@ import java.time.LocalDateTime;
 @Builder
 @RequiredArgsConstructor
 @ToString
-public class BookLoanRequestDto {
+public class LoanRecordResponseDto {
+    private Long loanId;
     private Long bookId;
     private Long userId;
-
-    @Builder.Default
-    private LocalDateTime returnDate = null;
+    private LocalDateTime loanDate;
+    private LocalDateTime dueDate;
+    private LocalDateTime returnDate;
 }
