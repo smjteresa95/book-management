@@ -2,6 +2,7 @@ package com.example.bookmanagement.service;
 
 import com.example.bookmanagement.domain.entity.Book;
 import com.example.bookmanagement.domain.repository.BookRepository;
+import com.example.bookmanagement.enums.BookStatus;
 import com.example.bookmanagement.web.dto.BookRequestDto;
 import com.example.bookmanagement.web.dto.BookResponseDto;
 import jakarta.transaction.Transactional;
@@ -47,15 +48,15 @@ public class BookServiceTest {
                 .author("제현주")
                 .publisher("어크로스")
                 .publicationDate(LocalDate.of(2018,8,11))
-                .availableCopies(3)
         .build();
 
         service.saveBook(dto);
 
         List<Book> books = repository.findAll();
-        assertThat(books.size()).isEqualTo(3);
-        assertThat(books.get(2).getIsbn()).isEqualTo("9791160560626");
-        assertThat(books.get(2).getTitle()).isEqualTo("일하는 마음");
+        //8개의 도서가 이미 등록 되어있음.
+        assertThat(books.size()).isEqualTo(9);
+        assertThat(books.get(8).getIsbn()).isEqualTo("9791160560626");
+        assertThat(books.get(8).getTitle()).isEqualTo("일하는 마음");
     }
 
     @Test
@@ -65,7 +66,7 @@ public class BookServiceTest {
         Long bookId = 1L;
 
         BookRequestDto requestDto = BookRequestDto.builder()
-                .availableCopies(5).build();
+                .status(BookStatus.LOANED).build();
         //when
         service.updateBook(bookId, requestDto);
 
@@ -73,6 +74,6 @@ public class BookServiceTest {
         Book updatedBook = repository.findById(1L).get();
         assertThat(updatedBook.getTitle()).isEqualTo("역행자");
         assertThat(updatedBook.getAuthor()).isEqualTo("자청");
-        assertThat(updatedBook.getAvailableCopies()).isEqualTo(requestDto.getAvailableCopies());
+        assertThat(updatedBook.getStatus()).isEqualTo(requestDto.getStatus());
     }
 }

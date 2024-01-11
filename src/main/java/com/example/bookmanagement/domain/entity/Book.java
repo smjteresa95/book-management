@@ -1,5 +1,6 @@
 package com.example.bookmanagement.domain.entity;
 
+import com.example.bookmanagement.enums.BookStatus;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -31,7 +32,8 @@ public class Book {
     private String translator;
     private String publisher;
     private LocalDate publicationDate;
-    private Integer availableCopies;
+    @Enumerated(EnumType.ORDINAL)
+    private BookStatus status = BookStatus.AVAILABLE;
 
     @CreationTimestamp
     private Timestamp createdAt;

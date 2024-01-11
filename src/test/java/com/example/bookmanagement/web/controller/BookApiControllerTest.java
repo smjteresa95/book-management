@@ -2,6 +2,7 @@ package com.example.bookmanagement.web.controller;
 
 import com.example.bookmanagement.domain.entity.Book;
 import com.example.bookmanagement.domain.repository.BookRepository;
+import com.example.bookmanagement.enums.BookStatus;
 import com.example.bookmanagement.service.BookService;
 import com.example.bookmanagement.service.LoanRecordService;
 import com.example.bookmanagement.web.dto.LoanRecordResponseDto;
@@ -56,7 +57,6 @@ public class BookApiControllerTest {
                 .author("제현주")
                 .publisher("어크로스")
                 .publicationDate(LocalDate.of(2018,8,11))
-                .availableCopies(3)
                 .build();
 
         when(service.getBook(id)).thenReturn(bookDto);
@@ -78,7 +78,6 @@ public class BookApiControllerTest {
                 .author("제현주")
                 .publisher("어크로스")
                 .publicationDate(LocalDate.of(2018,8,11))
-                .availableCopies(3)
                 .build();
 
 
@@ -108,14 +107,13 @@ public class BookApiControllerTest {
                 .author("제현주")
                 .publisher("어크로스")
                 .publicationDate(LocalDate.of(2018,8,11))
-                .availableCopies(3)
                 .build();
 
         when(repository.findById(1L)).thenReturn(Optional.of(initialBook));
 
         BookRequestDto requestDto = BookRequestDto.builder()
                 .subCategoryId(2)
-                .availableCopies(4).build();
+                .status(BookStatus.LOANED).build();
 
         mockMvc.perform(patch("/api/book/{id}", id)
                 .content(objectMapper.writeValueAsString(requestDto))

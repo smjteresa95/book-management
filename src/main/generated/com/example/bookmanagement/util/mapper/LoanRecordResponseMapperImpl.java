@@ -7,71 +7,71 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-01-11T12:55:35+0900",
+    date = "2024-01-11T17:25:39+0900",
     comments = "version: 1.5.3.Final, compiler: javac, environment: Java 21.0.1 (Oracle Corporation)"
 )
 @Component
 public class LoanRecordResponseMapperImpl implements LoanRecordResponseMapper {
 
     @Override
-    public LoanRecordResponseDto toDto(LoanRecord arg0) {
-        if ( arg0 == null ) {
+    public LoanRecordResponseDto toDto(LoanRecord e) {
+        if ( e == null ) {
             return null;
         }
 
         LoanRecordResponseDto.LoanRecordResponseDtoBuilder loanRecordResponseDto = LoanRecordResponseDto.builder();
 
-        loanRecordResponseDto.loanId( arg0.getLoanId() );
-        loanRecordResponseDto.bookId( arg0.getBookId() );
-        loanRecordResponseDto.userId( arg0.getUserId() );
-        loanRecordResponseDto.loanDate( arg0.getLoanDate() );
-        loanRecordResponseDto.dueDate( arg0.getDueDate() );
-        loanRecordResponseDto.returnDate( arg0.getReturnDate() );
+        loanRecordResponseDto.loanId( e.getLoanId() );
+        loanRecordResponseDto.bookId( e.getBookId() );
+        loanRecordResponseDto.userId( e.getUserId() );
+        loanRecordResponseDto.loanDate( e.getLoanDate() );
+        loanRecordResponseDto.dueDate( e.getDueDate() );
+        loanRecordResponseDto.returnDate( e.getReturnDate() );
 
         return loanRecordResponseDto.build();
     }
 
     @Override
-    public LoanRecord toEntity(LoanRecordResponseDto arg0) {
-        if ( arg0 == null ) {
+    public LoanRecord toEntity(LoanRecordResponseDto d) {
+        if ( d == null ) {
             return null;
         }
 
         LoanRecord.LoanRecordBuilder loanRecord = LoanRecord.builder();
 
-        loanRecord.loanId( arg0.getLoanId() );
-        loanRecord.bookId( arg0.getBookId() );
-        loanRecord.userId( arg0.getUserId() );
-        loanRecord.loanDate( arg0.getLoanDate() );
-        loanRecord.dueDate( arg0.getDueDate() );
-        loanRecord.returnDate( arg0.getReturnDate() );
+        loanRecord.loanId( d.getLoanId() );
+        loanRecord.bookId( d.getBookId() );
+        loanRecord.userId( d.getUserId() );
+        loanRecord.loanDate( d.getLoanDate() );
+        loanRecord.dueDate( d.getDueDate() );
+        loanRecord.returnDate( d.getReturnDate() );
 
         return loanRecord.build();
     }
 
     @Override
-    public void updateFromDto(LoanRecordResponseDto arg0, LoanRecordResponseDto arg1) {
-        if ( arg0 == null ) {
+    public void updateFromDto(LoanRecordResponseDto dto, LoanRecordResponseDto target) {
+        if ( dto == null ) {
             return;
         }
 
-        if ( arg0.getLoanId() != null ) {
-            arg1.setLoanId( arg0.getLoanId() );
+        if ( dto.getLoanId() != null ) {
+            target.setLoanId( dto.getLoanId() );
         }
-        if ( arg0.getBookId() != null ) {
-            arg1.setBookId( arg0.getBookId() );
+        if ( dto.getBookId() != null ) {
+            target.setBookId( dto.getBookId() );
         }
-        if ( arg0.getUserId() != null ) {
-            arg1.setUserId( arg0.getUserId() );
+        if ( dto.getUserId() != null ) {
+            target.setUserId( dto.getUserId() );
         }
-        if ( arg0.getLoanDate() != null ) {
-            arg1.setLoanDate( arg0.getLoanDate() );
+        if ( dto.getLoanDate() != null ) {
+            target.setLoanDate( dto.getLoanDate() );
         }
-        if ( arg0.getDueDate() != null ) {
-            arg1.setDueDate( arg0.getDueDate() );
+        if ( dto.getDueDate() != null ) {
+            target.setDueDate( dto.getDueDate() );
         }
-        if ( arg0.getReturnDate() != null ) {
-            arg1.setReturnDate( arg0.getReturnDate() );
+        if ( dto.getReturnDate() != null ) {
+            target.setReturnDate( dto.getReturnDate() );
         }
     }
 }

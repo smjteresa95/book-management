@@ -1,6 +1,7 @@
 package com.example.bookmanagement.web.dto;
 
 import com.example.bookmanagement.domain.entity.Book;
+import com.example.bookmanagement.enums.BookStatus;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -21,6 +22,6 @@ public class BookRequestDto {
     private String translator;
     private String publisher;
     private LocalDate publicationDate;
-    private Integer availableCopies;
+    private BookStatus status;
 
 }

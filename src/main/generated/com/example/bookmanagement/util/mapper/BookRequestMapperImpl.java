@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-01-11T00:23:02+0900",
+    date = "2024-01-11T17:25:39+0900",
     comments = "version: 1.5.3.Final, compiler: javac, environment: Java 21.0.1 (Oracle Corporation)"
 )
 @Component
@@ -30,7 +30,7 @@ public class BookRequestMapperImpl implements BookRequestMapper {
         bookRequestDto.translator( e.getTranslator() );
         bookRequestDto.publisher( e.getPublisher() );
         bookRequestDto.publicationDate( e.getPublicationDate() );
-        bookRequestDto.availableCopies( e.getAvailableCopies() );
+        bookRequestDto.status( e.getStatus() );
 
         return bookRequestDto.build();
     }
@@ -52,7 +52,7 @@ public class BookRequestMapperImpl implements BookRequestMapper {
         book.translator( d.getTranslator() );
         book.publisher( d.getPublisher() );
         book.publicationDate( d.getPublicationDate() );
-        book.availableCopies( d.getAvailableCopies() );
+        book.status( d.getStatus() );
 
         return book.build();
     }
@@ -90,8 +90,8 @@ public class BookRequestMapperImpl implements BookRequestMapper {
         if ( dto.getPublicationDate() != null ) {
             target.setPublicationDate( dto.getPublicationDate() );
         }
-        if ( dto.getAvailableCopies() != null ) {
-            target.setAvailableCopies( dto.getAvailableCopies() );
+        if ( dto.getStatus() != null ) {
+            target.setStatus( dto.getStatus() );
         }
     }
 }

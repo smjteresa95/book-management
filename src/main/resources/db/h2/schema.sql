@@ -18,7 +18,7 @@ CREATE TABLE books (
                        translator VARCHAR(255),
                        publisher VARCHAR(255),
                        publicationDate DATE,
-                       availableCopies INT,
+                       status TINYINT DEFAULT 2,
                        createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                        updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );

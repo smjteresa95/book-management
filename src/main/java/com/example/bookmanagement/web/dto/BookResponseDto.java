@@ -1,5 +1,6 @@
 package com.example.bookmanagement.web.dto;
 
+import com.example.bookmanagement.enums.BookStatus;
 import jakarta.persistence.Column;
 import lombok.*;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -21,7 +22,7 @@ public class BookResponseDto {
     private String translator;
     private String publisher;
     private LocalDate publicationDate;
-    private Integer availableCopies;
+    private BookStatus status;
     private Timestamp createdAt;
     private Timestamp updatedAt;
 

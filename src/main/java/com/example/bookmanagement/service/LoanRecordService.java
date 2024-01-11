@@ -5,6 +5,7 @@ import com.example.bookmanagement.domain.entity.Book;
 import com.example.bookmanagement.domain.entity.LoanRecord;
 import com.example.bookmanagement.domain.repository.BookRepository;
 import com.example.bookmanagement.domain.repository.LoanRecordRepository;
+import com.example.bookmanagement.enums.BookStatus;
 import com.example.bookmanagement.exception.BookLoanBlockedException;
 import com.example.bookmanagement.exception.EmptyObjectException;
 import com.example.bookmanagement.util.mapper.LoanRecordResponseMapper;
@@ -65,13 +66,13 @@ public class LoanRecordService {
         LocalDateTime today = LocalDateTime.now();
 
         //TODO 리펙토링 필요
-        //해당 도서가 존재하며, availableCopies가 1이상 인지 확인 한다.
+        //해당 도서가 존재하며, status가 대출이 가능 한 상태인지 확인한다.
         Optional<Book> bookOptional = bookRepository.findById(bookId);
         if(bookOptional.isEmpty())
             throw new EmptyObjectException("존재하지 않는 도서입니다.");
-        int currentAvailableCopies = bookOptional.get().getAvailableCopies();
-        if(currentAvailableCopies < 1)
-            throw new BookLoanBlockedException("해당 도서는 대출이 불가한 상태입니다.");
+        BookStatus status = bookOptional.get().getStatus();
+        if(status != BookStatus.AVAILABLE)
+            throw new BookLoanBlockedException("상태 코드" + status +": 해당 도서는 대출이 불가한 상태입니다.");
 
         //TODO 리펙토링 필요
         //유저의 연체 유무를 확인한다. 반납되지 않은 도서갯수를 구한다.
@@ -93,9 +94,9 @@ public class LoanRecordService {
             throw new BookLoanBlockedException("대여 가능한 도서의 권수를 초과하였습니다.");
 
 
-        //해당 도서의 availableCopies 갯수를 -1
+        //해당 도서의 status를 대출 중으로 변경
         BookRequestDto bookRequestDto = BookRequestDto.builder()
-                .availableCopies(--currentAvailableCopies).build();
+                .status(BookStatus.LOANED).build();
         bookService.updateBook(bookId, bookRequestDto);
 
         //대출처리
@@ -121,9 +122,9 @@ public class LoanRecordService {
         Optional<Book> bookOptional = bookRepository.findById(bookId);
         if(bookOptional.isEmpty())
             throw new EmptyObjectException("존재하지 않는 도서입니다.");
-        int currentAvailableCopies = bookOptional.get().getAvailableCopies();
+        BookStatus staus = bookOptional.get().getStatus();
         BookRequestDto bookRequestDto = BookRequestDto.builder()
-                .availableCopies(++currentAvailableCopies).build();
+                .status(BookStatus.AVAILABLE).build();
         bookService.updateBook(bookId, bookRequestDto);
 
         //returnDate 오늘 날짜로 업데이트

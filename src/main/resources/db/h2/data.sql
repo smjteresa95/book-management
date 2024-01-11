@@ -1,9 +1,32 @@
-INSERT INTO books (majorCategoryId, subCategoryId, title, isbn, author, publisher, publicationDate, availableCopies, createdAt, updatedAt)
+-- 대출가능한 도서
+INSERT INTO books (majorCategoryId, subCategoryId, title, isbn, author, publisher, publicationDate, status, createdAt, updatedAt)
 VALUES (9, 1, '역행자', '9788901260877', '자청', '웅진지식하우스', '2023-05-29', 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
-INSERT INTO books (majorCategoryId, subCategoryId, title, isbn, author, translator, publisher, publicationDate, availableCopies, createdAt, updatedAt)
+-- 대출 중인 도서
+INSERT INTO books (majorCategoryId, subCategoryId, title, isbn, author, publisher, publicationDate, status, createdAt, updatedAt)
+VALUES (9, 1, '역행자', '9788901260877', '자청', '웅진지식하우스', '2023-05-29', 0, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+
+-- 대출 중인 도서
+INSERT INTO books (majorCategoryId, subCategoryId, title, isbn, author, translator, publisher, publicationDate, status, createdAt, updatedAt)
 VALUES (1, 2, '오만과 편견', '9791160871210', '제인 오스틴', '송제훈', '연암서가', '2024-01-25', 0, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
+-- 한 사용자가 최대 대여 권수(5)를 채움.
+INSERT INTO books (majorCategoryId, subCategoryId, title, isbn, author, translator, publisher, publicationDate, status, createdAt, updatedAt)
+VALUES (1, 2, '오만과 편견', '9791160871210', '제인 오스틴', '송제훈', '연암서가', '2024-01-25', 0, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+
+INSERT INTO books (majorCategoryId, subCategoryId, title, isbn, author, translator, publisher, publicationDate, status, createdAt, updatedAt)
+VALUES (1, 2, '오만과 편견', '9791160871210', '제인 오스틴', '송제훈', '연암서가', '2024-01-25', 0, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+
+INSERT INTO books (majorCategoryId, subCategoryId, title, isbn, author, translator, publisher, publicationDate, status, createdAt, updatedAt)
+VALUES (1, 2, '오만과 편견', '9791160871210', '제인 오스틴', '송제훈', '연암서가', '2024-01-25', 0, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+
+INSERT INTO books (majorCategoryId, subCategoryId, title, isbn, author, translator, publisher, publicationDate, status, createdAt, updatedAt)
+VALUES (1, 2, '오만과 편견', '9791160871210', '제인 오스틴', '송제훈', '연암서가', '2024-01-25', 0, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+
+INSERT INTO books (majorCategoryId, subCategoryId, title, isbn, author, translator, publisher, publicationDate, status, createdAt, updatedAt)
+VALUES (1, 2, '오만과 편견', '9791160871210', '제인 오스틴', '송제훈', '연암서가', '2024-01-25', 0, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+
+-- 카테고리 셋업
 INSERT INTO major_category (category) VALUES
                                           ('소설'),
                                           ('시/에세이'),
@@ -66,31 +89,31 @@ VALUES ((SELECT id FROM users WHERE userName = 'adminname'), 'ROLE_ADMIN');
 
 -- 정상반납된 도서
 INSERT INTO loan_record (bookId, userId, loanDate, dueDate, returnDate)
-VALUES (2, 1, '2024-01-02 00:00:00', '2024-01-16 00:00:00', '2024-01-10 00:00:00');
+VALUES (1, 1, '2024-01-02 00:00:00', '2024-01-16 00:00:00', '2024-01-10 00:00:00');
 
 -- 대출 중인 도서
 INSERT INTO loan_record (bookId, userId, loanDate, dueDate)
-VALUES (1, 1, '2024-01-10 00:00:00', '2024-01-24 00:00:00');
+VALUES (2, 1, '2024-01-10 00:00:00', '2024-01-24 00:00:00');
 
 -- 연체된 도서가 있음
 INSERT INTO loan_record (bookId, userId, loanDate, dueDate)
-VALUES (1, 2, '2023-12-22 00:00:00', '2024-01-04 00:00:00');
+VALUES (3, 2, '2023-12-22 00:00:00', '2024-01-04 00:00:00');
 
 -- 인당 대출 가능 한 도서권수가 넘어감
-INSERT INTO loan_record (bookId, userId, loanDate, dueDate)
-VALUES (1, 3, '2024-01-11 00:00:00', '2024-01-25 00:00:00');
-
-INSERT INTO loan_record (bookId, userId, loanDate, dueDate)
-VALUES (2, 3, '2024-01-11 00:00:00', '2024-01-25 00:00:00');
-
-INSERT INTO loan_record (bookId, userId, loanDate, dueDate)
-VALUES (3, 3, '2024-01-11 00:00:00', '2024-01-25 00:00:00');
-
 INSERT INTO loan_record (bookId, userId, loanDate, dueDate)
 VALUES (4, 3, '2024-01-11 00:00:00', '2024-01-25 00:00:00');
 
 INSERT INTO loan_record (bookId, userId, loanDate, dueDate)
 VALUES (5, 3, '2024-01-11 00:00:00', '2024-01-25 00:00:00');
+
+INSERT INTO loan_record (bookId, userId, loanDate, dueDate)
+VALUES (6, 3, '2024-01-11 00:00:00', '2024-01-25 00:00:00');
+
+INSERT INTO loan_record (bookId, userId, loanDate, dueDate)
+VALUES (7, 3, '2024-01-11 00:00:00', '2024-01-25 00:00:00');
+
+INSERT INTO loan_record (bookId, userId, loanDate, dueDate)
+VALUES (8, 3, '2024-01-11 00:00:00', '2024-01-25 00:00:00');
 
 
 

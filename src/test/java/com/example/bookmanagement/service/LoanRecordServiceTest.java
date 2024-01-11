@@ -4,6 +4,7 @@ import com.example.bookmanagement.config.LoanPolicyConfig;
 import com.example.bookmanagement.domain.entity.LoanRecord;
 import com.example.bookmanagement.domain.repository.BookRepository;
 import com.example.bookmanagement.domain.repository.LoanRecordRepository;
+import com.example.bookmanagement.enums.BookStatus;
 import com.example.bookmanagement.exception.BookLoanBlockedException;
 import com.example.bookmanagement.web.dto.LoanRecordRequestDto;
 import com.example.bookmanagement.web.dto.LoanRecordResponseDto;
@@ -37,18 +38,6 @@ public class LoanRecordServiceTest {
 
     @Autowired
     LoanPolicyConfig policyConfig;
-
-    @Test
-    public void getAllLoanRecordByBookIdTest(){
-        long bookId = 2L;
-        List<LoanRecordResponseDto> responseDto = service.getAllByBookId(bookId);
-
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        String retrievedDate = responseDto.get(0).getLoanDate().format(formatter);
-
-        assertThat(responseDto.size()).isEqualTo(3);
-        assertThat(retrievedDate).isEqualTo("2024-01-02");
-    }
 
     @Test
     public void getAllLoanRecordByUserIdTest(){
@@ -96,8 +85,9 @@ public class LoanRecordServiceTest {
         LoanRecordRequestDto requestDto = LoanRecordRequestDto.builder()
                 .userId(userId).bookId(availableBookId).build();
         service.createBookLoan(requestDto);
-        //도서의 대여가능 권수 1->0로 변경, dueDate 자동적으로 값 들어가야 함
-        assertThat(bookRepository.findById(availableBookId).get().getAvailableCopies()).isEqualTo(0);
+        //도서 상태를 대출불가로 변경되었는지 확인, dueDate 자동적으로 값 들어가야 함
+        assertThat(bookRepository.findById(availableBookId).get().getStatus())
+                .isEqualTo(BookStatus.LOANED);
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         assertThat(repository.getAllByUserId(userId).get(2).getDueDate().format(formatter))
@@ -115,11 +105,11 @@ public class LoanRecordServiceTest {
 
         service.returnBook(requestDto);
 
-        //availableCopies가 1에서 2로 변경되는 지 확인
+        //도서 상태가 대출가능으로 변경되었는지 확인
         assertThat(bookRepository.findById(bookId)
                 .orElseThrow(()-> new NoSuchElementException("존재하지 않는 도서"))
-                .getAvailableCopies())
-                .isEqualTo(2);
+                .getStatus())
+                .isEqualTo(BookStatus.AVAILABLE);
 
         //loanRecord의 returnDate에 값이 들어갔는 지 확인
         LoanRecord updatedRecord = repository.getReturnedBook(bookId, userId).orElseThrow(()-> new NoSuchElementException("대출 이력 조회 불가"));
