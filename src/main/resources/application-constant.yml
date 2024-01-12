@@ -1,0 +1,3 @@
+loan-policy:
+  max-books-per-user: 5
+  loan-days: 14

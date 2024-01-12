@@ -1,0 +1,7 @@
+
+spring:
+  profiles:
+    active: dev
+
+  config:
+    import: classpath:application-constant.yml
