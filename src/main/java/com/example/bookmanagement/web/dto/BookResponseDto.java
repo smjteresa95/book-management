@@ -25,5 +25,6 @@ public class BookResponseDto {
     private BookStatus status;
     private Timestamp createdAt;
     private Timestamp updatedAt;
+    private Long version;
 
 }

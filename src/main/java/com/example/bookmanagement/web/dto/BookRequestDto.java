@@ -23,5 +23,6 @@ public class BookRequestDto {
     private String publisher;
     private LocalDate publicationDate;
     private BookStatus status;
+    private Long version;
 
 }

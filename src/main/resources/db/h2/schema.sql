@@ -20,7 +20,8 @@ CREATE TABLE books (
                        publicationDate DATE,
                        status TINYINT DEFAULT 2,
                        createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                       updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+                       updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+                       version BIGINT DEFAULT 0
 );
 
 CREATE TABLE loan_record (
@@ -29,7 +30,8 @@ CREATE TABLE loan_record (
                              userId BIGINT,
                              loanDate TIMESTAMP NOT NULL,
                              dueDate TIMESTAMP NOT NULL,
-                             returnDate TIMESTAMP
+                             returnDate TIMESTAMP,
+                             version BIGINT DEFAULT 0
 );
 
 CREATE TABLE major_category (

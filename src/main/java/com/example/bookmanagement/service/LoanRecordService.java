@@ -14,6 +14,7 @@ import com.example.bookmanagement.web.dto.LoanRecordRequestDto;
 import com.example.bookmanagement.web.dto.LoanRecordResponseDto;
 import com.example.bookmanagement.web.dto.LoanRecordUpdateDto;
 import com.example.bookmanagement.web.dto.BookRequestDto;
+import jakarta.persistence.OptimisticLockException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -60,19 +61,11 @@ public class LoanRecordService {
     }
 
     //아이디를 입력 후 도서에 대한 대출처리를 한다.
+    @Transactional
     public void createBookLoan(LoanRecordRequestDto requestDto){
         long userId = requestDto.getUserId();
         long bookId = requestDto.getBookId();
         LocalDateTime today = LocalDateTime.now();
-
-        //TODO 리펙토링 필요
-        //해당 도서가 존재하며, status가 대출이 가능 한 상태인지 확인한다.
-        Optional<Book> bookOptional = bookRepository.findById(bookId);
-        if(bookOptional.isEmpty())
-            throw new EmptyObjectException("존재하지 않는 도서입니다.");
-        BookStatus status = bookOptional.get().getStatus();
-        if(status != BookStatus.AVAILABLE)
-            throw new BookLoanBlockedException("상태 코드" + status +": 해당 도서는 대출이 불가한 상태입니다.");
 
         //TODO 리펙토링 필요
         //유저의 연체 유무를 확인한다. 반납되지 않은 도서갯수를 구한다.
@@ -89,26 +82,39 @@ public class LoanRecordService {
         }
         if(overDue > 0) throw new BookLoanBlockedException("연체된 도서가 있어 대출이 불가합니다.");
 
-        //인당 한번에 대출 가능 한 도서 권수를 제한한다.
+        //인당 대출 가능 한 도서 권수가 제한되어있다.
         if(loanedBooks >= policyConfig.getMaxBooksPerUser())
             throw new BookLoanBlockedException("대여 가능한 도서의 권수를 초과하였습니다.");
 
 
-        //해당 도서의 status를 대출 중으로 변경
-        BookRequestDto bookRequestDto = BookRequestDto.builder()
-                .status(BookStatus.LOANED).build();
-        bookService.updateBook(bookId, bookRequestDto);
+        //TODO 리펙토링 필요
+        //해당 도서가 존재하며, status가 대출이 가능 한 상태인지 확인한다.
+        Optional<Book> bookOptional = bookRepository.findById(bookId);
+        if(bookOptional.isEmpty())
+            throw new EmptyObjectException("존재하지 않는 도서입니다.");
+        BookStatus status = bookOptional.get().getStatus();
+        if(status != BookStatus.AVAILABLE)
+            throw new BookLoanBlockedException("상태 코드" + status +": 해당 도서는 대출이 불가한 상태입니다.");
 
-        //대출처리
-        //dueDate은 지정 된 날짜만큼 더해서 저장되도록 한다.
-        LoanRecordUpdateDto updateDto = LoanRecordUpdateDto.builder()
-                .bookId(bookId)
-                .userId(userId)
-                .loanDate(today)
-                .dueDate(today.plusDays(policyConfig.getLoanDays()))
-                .build();
+        try {
+            //해당 도서의 status를 대출 중으로 변경
+            BookRequestDto bookRequestDto = BookRequestDto.builder()
+                    .status(BookStatus.LOANED).build();
+            bookService.updateBook(bookId, bookRequestDto);
 
-        repository.save(updateMapper.toEntity(updateDto));
+            //대출처리
+            //dueDate은 지정 된 날짜만큼 더해서 저장되도록 한다.
+            LoanRecordUpdateDto updateDto = LoanRecordUpdateDto.builder()
+                    .bookId(bookId)
+                    .userId(userId)
+                    .loanDate(today)
+                    .dueDate(today.plusDays(policyConfig.getLoanDays()))
+                    .build();
+
+            repository.save(updateMapper.toEntity(updateDto));
+        } catch (OptimisticLockException e){
+            throw new BookLoanBlockedException("해당 도서는 현재 대출 중입니다.");
+        }
     }
 
     //반납처리

@@ -2,6 +2,7 @@ package com.example.bookmanagement.domain.repository;
 
 import com.example.bookmanagement.domain.entity.LoanRecord;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Lock;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -15,9 +16,6 @@ import java.util.Optional;
 public interface LoanRecordRepository extends JpaRepository<LoanRecord, Long> {
     List<LoanRecord> getAllByBookId(long id);
     List<LoanRecord> getAllByUserId(long id);
-
-    @Query("SELECT lr FROM LoanRecord lr WHERE lr.bookId = :bookId AND lr.userId = :userId AND lr.returnDate IS NULL")
-    Optional<LoanRecord> getBookToReturn(@Param("bookId") Long bookId, @Param("userId") Long userId);
 
     @Query("SELECT lr FROM LoanRecord lr WHERE lr.bookId = :bookId AND lr.userId = :userId")
     Optional<LoanRecord> getReturnedBook(@Param("bookId") Long bookId, @Param("userId") Long userId);

@@ -16,4 +16,6 @@ public class LoanRecordUpdateDto {
     private LocalDateTime loanDate;
     private LocalDateTime dueDate;
     private LocalDateTime returnDate;
+    private Long version;
+
 }

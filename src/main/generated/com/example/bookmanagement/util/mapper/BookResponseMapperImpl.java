@@ -7,96 +7,99 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-01-11T17:25:39+0900",
+    date = "2024-01-12T15:40:23+0900",
     comments = "version: 1.5.3.Final, compiler: javac, environment: Java 21.0.1 (Oracle Corporation)"
 )
 @Component
 public class BookResponseMapperImpl implements BookResponseMapper {
 
     @Override
-    public BookResponseDto toDto(Book e) {
-        if ( e == null ) {
+    public BookResponseDto toDto(Book arg0) {
+        if ( arg0 == null ) {
             return null;
         }
 
         BookResponseDto.BookResponseDtoBuilder bookResponseDto = BookResponseDto.builder();
 
-        bookResponseDto.majorCategoryId( e.getMajorCategoryId() );
-        bookResponseDto.subCategoryId( e.getSubCategoryId() );
-        bookResponseDto.title( e.getTitle() );
-        bookResponseDto.isbn( e.getIsbn() );
-        bookResponseDto.author( e.getAuthor() );
-        bookResponseDto.translator( e.getTranslator() );
-        bookResponseDto.publisher( e.getPublisher() );
-        bookResponseDto.publicationDate( e.getPublicationDate() );
-        bookResponseDto.status( e.getStatus() );
-        bookResponseDto.createdAt( e.getCreatedAt() );
-        bookResponseDto.updatedAt( e.getUpdatedAt() );
+        bookResponseDto.majorCategoryId( arg0.getMajorCategoryId() );
+        bookResponseDto.subCategoryId( arg0.getSubCategoryId() );
+        bookResponseDto.title( arg0.getTitle() );
+        bookResponseDto.isbn( arg0.getIsbn() );
+        bookResponseDto.author( arg0.getAuthor() );
+        bookResponseDto.translator( arg0.getTranslator() );
+        bookResponseDto.publisher( arg0.getPublisher() );
+        bookResponseDto.publicationDate( arg0.getPublicationDate() );
+        bookResponseDto.status( arg0.getStatus() );
+        bookResponseDto.createdAt( arg0.getCreatedAt() );
+        bookResponseDto.updatedAt( arg0.getUpdatedAt() );
 
         return bookResponseDto.build();
     }
 
     @Override
-    public Book toEntity(BookResponseDto d) {
-        if ( d == null ) {
+    public Book toEntity(BookResponseDto arg0) {
+        if ( arg0 == null ) {
             return null;
         }
 
         Book.BookBuilder book = Book.builder();
 
-        book.majorCategoryId( d.getMajorCategoryId() );
-        book.subCategoryId( d.getSubCategoryId() );
-        book.title( d.getTitle() );
-        book.isbn( d.getIsbn() );
-        book.author( d.getAuthor() );
-        book.translator( d.getTranslator() );
-        book.publisher( d.getPublisher() );
-        book.publicationDate( d.getPublicationDate() );
-        book.status( d.getStatus() );
-        book.createdAt( d.getCreatedAt() );
-        book.updatedAt( d.getUpdatedAt() );
+        book.majorCategoryId( arg0.getMajorCategoryId() );
+        book.subCategoryId( arg0.getSubCategoryId() );
+        book.title( arg0.getTitle() );
+        book.isbn( arg0.getIsbn() );
+        book.author( arg0.getAuthor() );
+        book.translator( arg0.getTranslator() );
+        book.publisher( arg0.getPublisher() );
+        book.publicationDate( arg0.getPublicationDate() );
+        book.status( arg0.getStatus() );
+        book.createdAt( arg0.getCreatedAt() );
+        book.updatedAt( arg0.getUpdatedAt() );
 
         return book.build();
     }
 
     @Override
-    public void updateFromDto(BookResponseDto dto, BookResponseDto target) {
-        if ( dto == null ) {
+    public void updateFromDto(BookResponseDto arg0, BookResponseDto arg1) {
+        if ( arg0 == null ) {
             return;
         }
 
-        if ( dto.getMajorCategoryId() != null ) {
-            target.setMajorCategoryId( dto.getMajorCategoryId() );
+        if ( arg0.getMajorCategoryId() != null ) {
+            arg1.setMajorCategoryId( arg0.getMajorCategoryId() );
         }
-        if ( dto.getSubCategoryId() != null ) {
-            target.setSubCategoryId( dto.getSubCategoryId() );
+        if ( arg0.getSubCategoryId() != null ) {
+            arg1.setSubCategoryId( arg0.getSubCategoryId() );
         }
-        if ( dto.getTitle() != null ) {
-            target.setTitle( dto.getTitle() );
+        if ( arg0.getTitle() != null ) {
+            arg1.setTitle( arg0.getTitle() );
         }
-        if ( dto.getIsbn() != null ) {
-            target.setIsbn( dto.getIsbn() );
+        if ( arg0.getIsbn() != null ) {
+            arg1.setIsbn( arg0.getIsbn() );
         }
-        if ( dto.getAuthor() != null ) {
-            target.setAuthor( dto.getAuthor() );
+        if ( arg0.getAuthor() != null ) {
+            arg1.setAuthor( arg0.getAuthor() );
         }
-        if ( dto.getTranslator() != null ) {
-            target.setTranslator( dto.getTranslator() );
+        if ( arg0.getTranslator() != null ) {
+            arg1.setTranslator( arg0.getTranslator() );
         }
-        if ( dto.getPublisher() != null ) {
-            target.setPublisher( dto.getPublisher() );
+        if ( arg0.getPublisher() != null ) {
+            arg1.setPublisher( arg0.getPublisher() );
         }
-        if ( dto.getPublicationDate() != null ) {
-            target.setPublicationDate( dto.getPublicationDate() );
+        if ( arg0.getPublicationDate() != null ) {
+            arg1.setPublicationDate( arg0.getPublicationDate() );
         }
-        if ( dto.getStatus() != null ) {
-            target.setStatus( dto.getStatus() );
+        if ( arg0.getStatus() != null ) {
+            arg1.setStatus( arg0.getStatus() );
         }
-        if ( dto.getCreatedAt() != null ) {
-            target.setCreatedAt( dto.getCreatedAt() );
+        if ( arg0.getCreatedAt() != null ) {
+            arg1.setCreatedAt( arg0.getCreatedAt() );
         }
-        if ( dto.getUpdatedAt() != null ) {
-            target.setUpdatedAt( dto.getUpdatedAt() );
+        if ( arg0.getUpdatedAt() != null ) {
+            arg1.setUpdatedAt( arg0.getUpdatedAt() );
+        }
+        if ( arg0.getVersion() != null ) {
+            arg1.setVersion( arg0.getVersion() );
         }
     }
 }

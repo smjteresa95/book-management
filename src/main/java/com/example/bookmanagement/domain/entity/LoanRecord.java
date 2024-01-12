@@ -28,4 +28,7 @@ public class LoanRecord {
     private LocalDateTime dueDate;
     private LocalDateTime returnDate;
 
+    @Version
+    private Long version;
+
 }

@@ -2,18 +2,22 @@ package com.example.bookmanagement.service;
 
 import com.example.bookmanagement.domain.entity.Book;
 import com.example.bookmanagement.domain.repository.BookRepository;
+import com.example.bookmanagement.exception.CocurrentException;
 import com.example.bookmanagement.exception.EmptyObjectException;
 import com.example.bookmanagement.util.mapper.BookRequestMapper;
 import com.example.bookmanagement.util.mapper.BookResponseMapper;
 import com.example.bookmanagement.web.dto.BookRequestDto;
 import com.example.bookmanagement.web.dto.BookResponseDto;
+import jakarta.persistence.OptimisticLockException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.io.OptionalDataException;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+import java.util.concurrent.CompletionException;
 
 @Slf4j
 @Service
@@ -46,15 +50,18 @@ public class BookService {
     @Transactional
     public Long updateBook(Long id, BookRequestDto requestDto){
         Optional<Book> existBook = repository.findById(id);
+
         if(existBook.isEmpty()){
             throw new EmptyObjectException("업데이트 할 도서정보가 존재하지 않습니다.");
         }
-
-        BookRequestDto bookToUpdate = requestMapper.toDto(existBook.get());
-        requestMapper.updateFromDto(requestDto, bookToUpdate);
-
-        log.info("Updated book: {}", bookToUpdate);
-        repository.save(requestMapper.toEntity(bookToUpdate));
+        try {
+            BookRequestDto bookToUpdate = requestMapper.toDto(existBook.get());
+            requestMapper.updateFromDto(requestDto, bookToUpdate);
+            log.info("Updated book: {}", bookToUpdate);
+            repository.save(requestMapper.toEntity(bookToUpdate));
+        } catch (OptimisticLockException e){
+            throw new CocurrentException("도서 동시 업데이트 충돌 발생");
+        }
 
         return id;
     }

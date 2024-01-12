@@ -39,4 +39,7 @@ public class Book {
     private Timestamp createdAt;
     @UpdateTimestamp
     private Timestamp updatedAt;
+
+    @Version
+    private Long version;
 }

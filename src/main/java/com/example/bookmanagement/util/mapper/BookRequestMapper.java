@@ -7,3 +7,5 @@ import org.mapstruct.Mapper;
 @Mapper(componentModel = "spring")
 public interface BookRequestMapper extends GenericMapper<BookRequestDto, Book> {
 }
+
+
