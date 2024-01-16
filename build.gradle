@@ -48,6 +48,18 @@ dependencies {
     //Java8에서 추가된 LocalDateTime을 objectMapper 메서드를 사용했을 때 직렬화/역직렬화 할 수 있게 한다.
     implementation group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: '2.16.1'
 
+    // spring security
+    implementation group: 'org.springframework.security', name: 'spring-security-core', version: '6.2.1'
+    // jwt(JSON web token)
+    implementation group: 'io.jsonwebtoken', name: 'jjwt-api', version: '0.12.3'
+    implementation group: 'com.auth0', name: 'java-jwt', version: '4.4.0'
+
+    // JSON encoders/decoders in Java
+    implementation group: 'org.json', name: 'json', version: '20231013'
+
+
+
+
 
 
 }

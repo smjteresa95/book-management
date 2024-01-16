@@ -1,12 +1,11 @@
 package com.example.bookmanagement.service;
 
 import com.example.bookmanagement.config.LoanPolicyConfig;
-import com.example.bookmanagement.domain.entity.Book;
 import com.example.bookmanagement.domain.entity.LoanRecord;
 import com.example.bookmanagement.domain.repository.BookRepository;
 import com.example.bookmanagement.domain.repository.LoanRecordRepository;
 import com.example.bookmanagement.enums.BookStatus;
-import com.example.bookmanagement.exception.BookLoanBlockedException;
+import com.example.bookmanagement.config.exception.BookLoanBlockedException;
 import com.example.bookmanagement.web.dto.LoanRecordRequestDto;
 import com.example.bookmanagement.web.dto.LoanRecordResponseDto;
 import org.junit.jupiter.api.DisplayName;

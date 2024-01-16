@@ -2,8 +2,8 @@ package com.example.bookmanagement.service;
 
 import com.example.bookmanagement.domain.entity.Book;
 import com.example.bookmanagement.domain.repository.BookRepository;
-import com.example.bookmanagement.exception.CocurrentException;
-import com.example.bookmanagement.exception.EmptyObjectException;
+import com.example.bookmanagement.config.exception.CocurrentException;
+import com.example.bookmanagement.config.exception.EmptyObjectException;
 import com.example.bookmanagement.util.mapper.BookRequestMapper;
 import com.example.bookmanagement.util.mapper.BookResponseMapper;
 import com.example.bookmanagement.web.dto.BookRequestDto;
@@ -14,10 +14,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.io.OptionalDataException;
 import java.util.NoSuchElementException;
 import java.util.Optional;
-import java.util.concurrent.CompletionException;
 
 @Slf4j
 @Service

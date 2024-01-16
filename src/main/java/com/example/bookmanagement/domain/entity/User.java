@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.sql.Timestamp;
 import java.util.HashSet;
@@ -21,23 +22,18 @@ import java.util.Set;
                 @UniqueConstraint(columnNames = "userName"),
                 @UniqueConstraint(columnNames = "email")
         })
-public class User {
+public class User{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String userName;
+    private String userId;
     @Column(nullable = false)
     private String email;
-    private String password;
+    private String userPw;
     private String firstName;
     private String lastName;
     private String phoneNum;
-
-    @ElementCollection(fetch = FetchType.LAZY)
-    @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
-    @Enumerated(EnumType.STRING) // Use EnumType.STRING to store the enum values as strings
-    @Column(name = "role_name")
-    private Set<ERole> roles = new HashSet<>();
+    private String userStatus;
 
     @CreationTimestamp
     private Timestamp createdAt;

@@ -1,4 +1,4 @@
-package com.example.bookmanagement.exception;
+package com.example.bookmanagement.config.exception;
 
 public class EmptyObjectException extends RuntimeException{
 
